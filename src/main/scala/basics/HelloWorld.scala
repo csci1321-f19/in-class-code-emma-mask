@@ -7,7 +7,7 @@ This is a basic main for you to start off with.
 */
 object HelloWorld {
 	def main(args: Array[String]): Unit = {
-		println("Hello Emma!")
+		println("Hello World!")
 
 		val e1 = new Entity(0, 0)
 		val e2 = new Entity(2, 0)
