@@ -1,0 +1,25 @@
+<rooms>
+  <room keyword="GrassyPath" name="Grassy Path">
+    <description>
+A vague path leads through the tall grass and weeds. Towering trees rise to the north. 
+Sounds of a town echo from the South.
+    </description>
+    <exits>DarkForestS,TribellTownN,-1,-1,-1,-1</exits>
+  </room>
+  <room keyword="DarkForestS" name="Dark Forest South Enterance">
+    <description>
+A dense cover of trees blocks most light from entering. Tall plants and strange sounds 
+surround the area. Said to be the home of the monsterous Simwel: a vicious creature that 
+will prey on any living thing that enters. A grassy path leads back to the light in the south.
+    </description>
+    <exits>-1,GrassyPath,-1,-1,-1,-1</exits>
+    <item name="Stick">A makeshift weapon used for defense.</item>
+  </room>
+  <room keyword="TribellTownN" name="Tribell Town North Enterance">
+    <description>
+A cobblestone path to the south leads into the heart of the city, but it is blocked by a larged, locked gate. Inside, children play and merchants tell customers about their goods. A grassy path to the north dissapears into the distance.
+    </description>
+    <exits>GrassyPath,-1,-1,-1,-1,-1</exits>
+    <item name="Boot">The forgotten shoe of some lost traveler. Made of leather.</item>
+  </room>
+</rooms>

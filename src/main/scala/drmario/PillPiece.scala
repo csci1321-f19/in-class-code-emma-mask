@@ -10,5 +10,4 @@ class PillPiece(val x: Int, val y: Int, val color: DMColor.Value) extends Cell {
     val ny = y+dy
     nx >= 0 && nx < 8 && ny < 16
   }
-
 }

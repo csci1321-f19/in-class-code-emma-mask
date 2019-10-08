@@ -1,4 +1,4 @@
-package networking
+package networkingWithNotes
 
 import akka.actor.Actor
 import java.net.Socket
