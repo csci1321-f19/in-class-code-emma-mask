@@ -3,11 +3,14 @@ import akka.actor.Actor
 
 class RoomSupervisor extends Actor {
   def receive = {
+	case AddPlayerToRoom(player, keyword) =>
+		player ! Player.TakeExit(rooms.get(keyword))
     case m => println("Unhandled message in RoomSupervisor: " + m)
   }
 
   val rooms = readRooms()
-  	for (child <- context.children) child ! Room.LinkExits(rooms) // tells all of the rooms to go find their exits
+	for (child <- context.children) child ! Room.LinkExits(rooms) // tells all of the rooms to go find their exits
+	  
 	def readRooms(): Map[String, ActorRef] = {
 		val xmlData = xml.XML.loadFile("map.xml")
 		(xmlData \ "room").map(readRoom).toMap
@@ -24,5 +27,5 @@ class RoomSupervisor extends Actor {
 }
 
 object RoomSupervisor {
-	case class AddPlayerToRoom(player: ActorRef, keyword: String)
+	case class AddPlayerToRoom(player: ActorRef, keyword: String) // this might be the only message that RoomSupervisor recieves
 }
