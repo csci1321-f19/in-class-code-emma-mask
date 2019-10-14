@@ -6,6 +6,7 @@ import scalafx.scene.image.ImageView
 import scalafx.application.Platform
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext
+import scala.compat.Platform
 
 class Julia(c: Complex) {
   val stage = new Stage {
@@ -29,17 +30,28 @@ class Julia(c: Complex) {
   def drawJulia(img: WritableImage): Unit = {
     val writer = img.pixelWriter
     val start = System.nanoTime()
-    val futures = for {
-      j <- 0 until img.height().toInt
-      y = MinImag + j*(MaxImag-MinImag)/img.height()
-      i <- 0 until img.width().toInt
-      x = MinReal + i*(MaxReal-MinReal)/img.width()
-    } yield Future {
-      val cnt = juliaCount(Complex(x, y))
-      writer.setColor(i, j, Mandelbrot.mandelColor(cnt))
+    val futures = for (j <- 0 until img.height().toInt) yield {
+        val y = MinImag + j*(MaxImag-MinImag)/img.height()
+        val colors = for (i <- 0 until img.width().toInt) yield {
+          x = MinReal + i*(MaxReal-MinReal)/img.width()
+          val cnt = juliaCount(Complex(x, y))
+          Mandelbrot.mandelColor(cnt)
+        }
+        (j, colors)
+      }
     }
-    Future.sequence(futures).foreach( _ => println(s"Drawing time: ${(System.nanoTime - start) * 1e-9} seconds"))
-  }
+    val f = Future.sequence(futures).map { rows =>    
+      Platform.runLater {     // Platform.runLater won't be on midterm
+        for((i, colors) <- rows) {
+          for(j <- colors.indices) writer.setColor(i, j, colors(j))
+        }
+      }
+    } // use this to get a future of sequence from a sequence of futures
+
+    // important thing about this for the exam:
+      // you can do things like mapping futures to make a new future (just like how mapping a list makes a new list)
+      // use foreach to go from sequence of futures to future of sequence 
+    f.foreach( _ => println(s"Drawing time: ${(System.nanoTime - start) * 1e-9} seconds"))
 
   def juliaCount(z0: Complex): Int = {
     var z = z0
