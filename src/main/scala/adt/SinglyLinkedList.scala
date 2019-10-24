@@ -3,6 +3,7 @@ package adt
 class SinglyLinkedList[A] extends collection.mutable.Buffer[A] {    
     private var hd: Node[A] = null
     private var tl: Node[A] = null
+    private var numElems = 0
 
     def length: Int = ???
 
@@ -65,5 +66,5 @@ class SinglyLinkedList[A] extends collection.mutable.Buffer[A] {
 }
 
 object SinglyLinkedList {
-    private class Node(var data: A, var next: Node)
+    private class Node(var data: A, var next: Node[A])
 }
