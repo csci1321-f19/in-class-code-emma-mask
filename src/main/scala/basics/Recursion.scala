@@ -6,6 +6,7 @@ object Recursion extends App {
     def fib(n: Int): Int = if (n < 2) 1 else fib(n-2) + fib(n-1)
 
     def packBins(bins: Array[Double], objs: Array[Double]): Boolean = {
+        // order 2^n
         def helper(o: Int): Boolean = {
             // o is index into objs
             if (o >= objs.length) true
@@ -26,6 +27,7 @@ object Recursion extends App {
     }
 
     def knapsack(values: List[Double], weights: List[Double], weightLeft: Double): Double = {
+        // order 
         if (values.isEmpty) 0.0
         else {
             if (weights.head <= weightLeft) {
