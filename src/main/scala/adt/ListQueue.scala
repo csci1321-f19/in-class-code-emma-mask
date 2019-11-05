@@ -1,5 +1,5 @@
 package adt
-
+/*
 trait ListQueue[A] extends MyQueue[A]{
     import ListQueue._
 
@@ -27,3 +27,4 @@ trait ListQueue[A] extends MyQueue[A]{
 object ListQueue {
     private class Node[A](data: A, next: Node[A])
 }
+*/

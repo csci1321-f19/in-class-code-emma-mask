@@ -1,10 +1,10 @@
 package adt
 
-import org.junit.Test
-import org.junit.Assert._
+//import org.junit.Test
+//import org.junit.Assert._
 
 
-class TestSeq {
+/*class TestSeq {
     private var lst: SinglyLinkedList[Int] = null
     @Before def makeList(): Unit = {
         lst = new SinglyLinkedList[Int]()
@@ -21,4 +21,4 @@ class TestSeq {
     }
 
     @Test def addRemoveTwo: Unit
-}
+}*/

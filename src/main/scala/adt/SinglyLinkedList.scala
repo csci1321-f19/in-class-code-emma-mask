@@ -1,5 +1,5 @@
 package adt
-
+/*
 class SinglyLinkedList[A] extends collection.mutable.Buffer[A] {    
     private var hd: Node[A] = null
     private var tl: Node[A] = null
@@ -68,3 +68,4 @@ class SinglyLinkedList[A] extends collection.mutable.Buffer[A] {
 object SinglyLinkedList {
     private class Node(var data: A, var next: Node[A])
 }
+*/

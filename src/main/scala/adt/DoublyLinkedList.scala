@@ -1,5 +1,5 @@
 package adt
-
+/*
 class DoublyLinkedList[A] extends collection.mutable.Buffer[A] {    
     private var hd: Node[A] = null
     private var tl: Node[A] = null
@@ -78,3 +78,4 @@ class DoublyLinkedList[A] extends collection.mutable.Buffer[A] {
 object DoublyLinkedList {
     private class Node(var prev: Node[A], var data: A, var next: Node[A])
 }
+*/
