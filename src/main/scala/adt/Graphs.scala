@@ -15,7 +15,7 @@ object Graphs extends App {
         def helper(n1: Int, visited: Set[Int]): Boolean = {
             // nodes in MUD would be passed around as Strings for the keywords
             if (node1 == node2) true else {
-                var ret = false
+                val ret = false
                 val newVisited = visited + n1
                 for (n <- 0 until connect.length) {
                     if (connect(node1)(n) != 0 && !visited(n)) {
@@ -33,16 +33,15 @@ object Graphs extends App {
         // MUD will have shortest path, not reachable
         def helper(n1: Int, visited: Set[Int]): Int = {
             // nodes in MUD would be passed around as Strings for the keywords
-            if (n1 == node2) 0 else {
-                var ret = 1000000000
+            if (node1 == node2) 0 else {
+                val ret = 1000000000
                 val newVisited = visited + n1
                 for (n <- 0 until connect.length) {
-                    if (connect(n1)(n) != 0 && !visited(n)) {
-                        //println("ret = "+ret)
+                    if (connect(node1)(n) != 0 && !visited(n)) {
                         ret = ret min helper(n, newVisited) // makes ret equal to the smaller of the two
                     }
                 }
-                ret + 1
+                ret + 1     // would add weight instead if the edges were weightsS
             }
         }
         helper(node1, Set.empty)
