@@ -16,10 +16,35 @@ class BSTMap[K, V](lt: (K, K) => Boolean) extends mutable.Map[K, V] {
         if (rover != null) rover.value = value
     }
     
-    def iterator: Iterator[(K, V)] = ???
+    def iterator = new Iterator[(K, V)] {
+        // making an in-order iterator
+        // have to have something (the stack) that stores memory to keep track of parents you've already visited
+        val stack = mutable.Stack[Node[K, V]]()
+
+        def pushAllLeft(n: Node[K, V]): Unit = {
+            if(n != null) {
+                stack.push(n)
+                pushAllLeft(n.left)
+            }
+        }
+        pushAllLeft(root)
+
+        def hasNext: Boolean = stack.nonEmpty
+        def next(): (K, V) = {
+            val ret = stack.pop()
+            pushAllLeft(ret.right) // doesn't do anything if a node doesn't have anything to its right
+            (ret.key, ret.value)
+        }
+    }
+
     override def update(key: K, value: V): Unit = ???
 
-    def -=(key: K) = ???
+    def -=(key: K) = {
+        // find it
+        // check special cases (0 or 1 children)
+        // otherwise, replace with the smallest node on the right
+        ???
+    }
 
     def +=(kv: (K, V)) = {
         def helper(n: Node[K, V]): Node[K, V] = {
@@ -41,6 +66,39 @@ class BSTMap[K, V](lt: (K, K) => Boolean) extends mutable.Map[K, V] {
         }
         root = helper(root)
         this
+    }
+
+    def preorder(visitor: (K, V) => Unit): Unit = {
+        def helper(n: Node[K, V]): Unit = {
+            if (n != null) {
+                visitor(n.key, n.value)
+                helper(n.left)
+                helper(n.right)
+            }
+        }
+        helper(root)
+    }
+
+    def postorder(visitor: (K, V) => Unit): Unit = {
+        def helper(n: Node[K, V]): Unit = {
+            if (n != null) {
+                helper(n.left)
+                helper(n.right)
+                visitor(n.key, n.value)
+            }
+        }
+        helper(root)
+    }
+
+    def inorder(visitor: (K, V) => Unit): Unit = {
+        def helper(n: Node[K, V]): Unit = {
+            if (n != null) {
+                helper(n.left)
+                visitor(n.key, n.value)
+                helper(n.right)
+            }
+        }
+        helper(root)
     }
 
 }
